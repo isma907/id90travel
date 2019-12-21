@@ -7,6 +7,10 @@
 Download the project and
 Run `npm install`
 
+After success installation 
+Run `npm start`
+And Navigate to `http://localhost:4200/`
+
 # Id90travel
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.7.
