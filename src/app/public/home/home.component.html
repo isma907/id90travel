@@ -1,0 +1,87 @@
+<div class="row no-gutter">
+    <div class="col bg-white filter-card py-3">
+        <form [formGroup]="searchForm">
+            <div class="row align-items-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date">Destination</label>
+                        <div class="form-field">
+                            <i class="icon icon-map"></i>
+                            <input formControlName="destination" type="text" class="form-control form-control-sm"
+                                placeholder="Ej: Buenos Aires">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <ejs-daterangepicker #rangeObj [min]="minDate" id='daterangepicker' placeholder='Select Dates'
+                            [startDate]='start' [endDate]='end' (change)="setDates($event)" separator="@">
+                        </ejs-daterangepicker>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="guests">Guest</label>
+                        <div class="form-field">
+                            <i class="icon icon-arrow-down3"></i>
+                            <input type="number" class="form-control form-control-sm" formControlName="guests[]"
+                                min="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <button [disabled]="!searchForm.valid || loading" type="button" (click)="_get()" value="Find Hotel"
+                        class="btn btn-primary btn-block">
+                        <span *ngIf="!loading"><i class="fa fa-search"></i> Search</span>
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"
+                            aria-hidden="true"></span>
+                        <span *ngIf="loading" class="pl-3">Loading...</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row no-gutter">
+    <div class="col px-0">
+        <div class="card mb-3 p-0" style="height: 400px">
+            <div class="row no-gutters map-height">
+                <div class="col-md-3 col-sm-3">
+                    <ul class="list-group list-group-flush map-height">
+                        <li class="list-group-item" *ngFor="let item of hotels$"
+                            [ngClass]="{'bg-primary text-white':item.active}">
+                            <i class="fas fa-hotel"></i> {{item.name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <div class="card-body p-0" style="height: 100%">
+                        <agm-map [latitude]="lat" [longitude]="lng" style="width:100%;height: 100%" #mapCont>
+                            <agm-marker [latitude]="item.location.latitude" [longitude]="item.location.longitude"
+                                *ngFor="let item of hotels$; let i = index;"
+                                (markerClick)="item.active = true;item.visible=true">
+                                <agm-info-window [disableAutoPan]="true"
+                                    (infoWindowClose)="item.active = false;item.visible=false">
+                                    <div class="card" style="width: 18rem;">
+                                        <img src="{{item.image}}" class="card-img-top" alt="{{item.name}}"
+                                            *ngIf="item.visible">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{item.name}}</h5>
+                                            <p class="card-text"></p>
+                                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                        </div>
+                                    </div>
+                                </agm-info-window>
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "https://bootswatch.com/4/yeti/bootstrap.min.css";
+@import "https://bootswatch.com/4/materia/bootstrap.min.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.pin2 {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-left: 115px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .pin2::after {
+    position: absolute;
+    content: '';
+    width: 0px;
+    height: 0px;
+    bottom: -30px;
+    left: -6px;
+    border: 10px solid transparent;
+    border-top: 17px solid #fff;
+  }
+
+  .map-height{
+    height: 400px;
+    &.list-group{
+      overflow-y: auto
+    }
+  }
+
+  .filter-card{
+    border: 2px solid;
+    border-style: solid;
+    border-color: #4190e7;
+    border-left: 0;
+    border-right: 0;
+  }
