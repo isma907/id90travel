@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
 
   searchForm: FormGroup;
   minDate = new Date();
+  start;
+  end;
   lat;
   lng;
   loading;
